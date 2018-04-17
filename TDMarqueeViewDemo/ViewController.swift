@@ -76,7 +76,7 @@ class ViewController: UIViewController {
                                     content: content,
                                     timeInterval: 10.0)
         marqueeView3?.titleColor = .red
-        marqueeView3?.contentColor = .blue
+        marqueeView3?.contentTextColor = .blue
         marqueeView3?.gotoDetailAction {
             print("每日行情 ： 666")
         }

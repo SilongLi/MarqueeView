@@ -19,10 +19,6 @@ public var contentTextColor: UIColor { get set }
 
 /// 标题文案颜色
 public var titleColor: UIColor { get set }
-
-/// 内容文案颜色
-public var contentColor: UIColor { get set }
-
 ~~~
 
 初始化方法

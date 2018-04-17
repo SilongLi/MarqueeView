@@ -32,15 +32,6 @@ open class TDMarqueeView: UIView {
         return content
     }()
     
-    /// 内容颜色
-    public var contentTextColor: UIColor = .black {
-        didSet {
-            contentLabelArray.forEach { (label) in
-                label.textColor = contentTextColor
-            }
-        }
-    }
-    
     /// 指示器
     private lazy var indicatorView: UIView = {
         let indicator = UIView()
@@ -71,11 +62,11 @@ open class TDMarqueeView: UIView {
         }
     }
     
-    /// 内容文案颜色
-    public var contentColor: UIColor = .black {
+    /// 内容颜色
+    public var contentTextColor: UIColor = .black {
         didSet {
-            for label in contentLabelArray {
-                label.textColor = contentColor
+            contentLabelArray.forEach { (label) in
+                label.textColor = contentTextColor
             }
         }
     }
