@@ -6,9 +6,10 @@
 //  Copyright © 2018年 tuandai. All rights reserved.
 //
 
-private let SecondLabelLeading: CGFloat = 30
-
 import UIKit
+
+/// “跑马灯”内容之间的间距
+private let SecondLabelLeading: CGFloat = 30.0
 
 open class TDMarqueeView: UIView {
     /// 图标

@@ -60,3 +60,8 @@ public func start()
 /// 停止“跑马灯”动画
 public func stop()
 ~~~
+
+## 演示
+![跑马灯](http://chuantu.biz/t6/288/1523975115x-1566657687.gif)
+
+
