@@ -56,8 +56,8 @@
 		997B63D820468A5B00809BC5 /* TDMarqueeViewDemo */ = {
 			isa = PBXGroup;
 			children = (
-				997B63D920468A5B00809BC5 /* AppDelegate.swift */,
 				997B63EB20468A7200809BC5 /* TDMarqueeView.swift */,
+				997B63D920468A5B00809BC5 /* AppDelegate.swift */,
 				997B63DB20468A5B00809BC5 /* ViewController.swift */,
 				997B63DD20468A5B00809BC5 /* Main.storyboard */,
 				997B63E020468A5B00809BC5 /* Assets.xcassets */,
