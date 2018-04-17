@@ -56,7 +56,7 @@ open class TDMarqueeView: UIView {
     private var title: String?
     private var content: String?
     private var timeInterval: TimeInterval = {
-        return TimeInterval.init(5.0)
+        return TimeInterval(5.0)
     }()
     private var firstContentFrame: CGRect = CGRect.zero
     private var secondContentFrame: CGRect = CGRect.zero
@@ -64,8 +64,32 @@ open class TDMarqueeView: UIView {
     private var isStop = false
     private var gotoDetailBlock: (() -> Void)?
     
+    /// 标题文案颜色
+    public var titleColor: UIColor = .black {
+        didSet {
+            titleLabel.textColor = titleColor
+        }
+    }
+    
+    /// 内容文案颜色
+    public var contentColor: UIColor = .black {
+        didSet {
+            for label in contentLabelArray {
+                label.textColor = contentColor
+            }
+        }
+    }
+    
     // MARK: - init
     
+    /// 初始化“跑马灯”视图方法
+    ///
+    /// - Parameters:
+    ///   - frame: 视图大小
+    ///   - content: “跑马灯”内容
+    ///   - contentTextFont: “跑马灯”内容字体大小
+    ///   - isContentCenter: 是否居中
+    ///   - timeInterval: “跑马灯”动画执行时间
     convenience init(frame: CGRect,
                      content: String,
                      contentTextFont: UIFont = .systemFont(ofSize: 10),
@@ -143,7 +167,7 @@ open class TDMarqueeView: UIView {
         let contentW = Double(frame.size.width) - contentX - indicatorViewW
         contentView.frame = CGRect(x: contentX, y: 0.0, width: contentW, height: Double(frame.size.height))
         contentView.clipsToBounds = true
-        self.addSubview(contentView)
+        addSubview(contentView)
         
         // 给组件赋值
         self.content = content
@@ -157,8 +181,7 @@ open class TDMarqueeView: UIView {
         
         // 计算“跑马灯”内容的显示大小
         let sizeOfText = lab.sizeThatFits(CGSize.zero)
-        firstContentFrame  = CGRect(x: 0.0, y: 0.0, width: Double(sizeOfText.width), height: Double(frame.size.height))
-        secondContentFrame = CGRect(x: Double(firstContentFrame.origin.x+firstContentFrame.size.width) + Double(SecondLabelLeading), y: 0.0, width: Double(sizeOfText.width), height: Double(frame.size.height))
+        firstContentFrame = CGRect(x: 0, y: 0, width: sizeOfText.width, height: frame.size.height)
         lab.frame = firstContentFrame
         contentView.addSubview(lab)
         contentLabelArray.append(lab)
@@ -166,6 +189,10 @@ open class TDMarqueeView: UIView {
         // 如果一屏幕显示不完全，则添加新的一个lab，并执行动画
         let useReserve = Double(sizeOfText.width) > contentW ? true : false
         if useReserve {
+            firstContentFrame = CGRect(x: 0, y: 0, width: sizeOfText.width + SecondLabelLeading, height: frame.size.height)
+            secondContentFrame = CGRect(x: firstContentFrame.origin.x + firstContentFrame.size.width, y: 0, width: sizeOfText.width, height: frame.size.height)
+            lab.frame = firstContentFrame
+            
             let lab = UILabel(frame: secondContentFrame)
             lab.textColor = contentTextColor
             lab.font = contentTextFont
@@ -175,8 +202,7 @@ open class TDMarqueeView: UIView {
             self.start()
         } else {
             if isContentCenter {
-                let frame = firstContentFrame
-                firstContentFrame = CGRect(x: Double(contentView.frame.width - frame.width)/2, y: 0.0, width: Double(frame.width), height: Double(frame.size.height))
+                firstContentFrame = CGRect(x: contentView.frame.width - frame.size.width/2, y: 0, width: frame.size.width, height: frame.size.height)
                 lab.frame = firstContentFrame
             }
         }
@@ -236,7 +262,7 @@ open class TDMarqueeView: UIView {
                                     y: 0,
                                     width: self.firstContentFrame.size.width,
                                     height: self.firstContentFrame.size.height)
-            lbindex1.frame = CGRect(x: lbindex0.frame.origin.x + lbindex0.frame.size.width + SecondLabelLeading,
+            lbindex1.frame = CGRect(x: lbindex0.frame.origin.x + lbindex0.frame.size.width,
                                     y: 0,
                                     width: lbindex1.frame.size.width,
                                     height: lbindex1.frame.size.height)
